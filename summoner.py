@@ -17,7 +17,7 @@ class Summoner:
 
     @commands.command(pass_context=True, no_pm=True)
     async def champmastery(self, ctx, sumName:str, champName:str, region:str):
-        """<Summoner> <Champion> <Region>"""
+        """"Summoner Name" "Champion" "Region"""
         await self.bot.send_typing(ctx.message.channel)
         chest = None
 
@@ -50,7 +50,7 @@ class Summoner:
 
     @commands.command(pass_context=True, no_pm=True)
     async def lookup(self, ctx, sumName:str, region:str):
-        """<Summoner> <Region>"""
+        """"Summoner Name" "Region"""
         await self.bot.send_typing(ctx.message.channel)
         title = "Summoner Lookup - {0} ({1})".format(sumName, region)
         em = discord.Embed(title=title, colour=0x1affa7)
@@ -67,6 +67,7 @@ class Summoner:
         em.set_thumbnail(url=url)
         for league in leagues:
             loop += 1
+            queue = league.queue
             tier = league.tier.value
             for entries in league.entries:
                 division = entries.division.value
@@ -75,28 +76,19 @@ class Summoner:
                 overallWins += wins
                 losses = entries.losses
                 overallLosses += losses
-            #Fix the fact that if a preceding rank does not exist, the folling is filed under it
-            if loop == 1:
-                if division is None:
-                    pass
-                else:
-                    ratio = (wins / (wins + losses) * 100)
-                    value = "{0} {1} {2} ({3}W/{4}L {5:.2f}%)".format(tier, division, lp, wins, losses, ratio)
-                    em.add_field(name="Ranked Solo", value=value, inline=False)
-            elif loop == 2:
-                if division is None:
-                    pass
-                else:
-                    ratio = (wins / (wins + losses) * 100)
-                    value = "{0} {1} {2} ({3}W/{4}L {5:.2f}%)".format(tier, division, lp, wins, losses, ratio)
-                    em.add_field(name="Ranked Flex", value=value, inline=False)
-            elif loop == 3:
-                if division is None:
-                    pass
-                else:
-                    ratio = (wins / (wins + losses) * 100)
-                    value = "{0} {1} {2} ({3}W/{4}L {5:.2f}%)".format(tier, division, lp, wins, losses, ratio)
-                    em.add_field(name="Ranked TT", value=value, inline=False)
+            #Fix the fact that if a preceding rank does not exist, the following is filed under it
+            if queue = 'RANKED_SOLO_5x5':
+                ratio = (wins / (wins + losses) * 100)
+                value = "{0} {1} {2} ({3}W/{4}L {5:.2f}%)".format(tier, division, lp, wins, losses, ratio)
+                em.add_field(name="Ranked Solo", value=value, inline=False)
+            elif queue = 'RANKED_FLEX_SR':
+                ratio = (wins / (wins + losses) * 100)
+                value = "{0} {1} {2} ({3}W/{4}L {5:.2f}%)".format(tier, division, lp, wins, losses, ratio)
+                em.add_field(name="Ranked Flex", value=value, inline=False)
+            elif queue = 'RANKED_FLEX_TT':
+                ratio = (wins / (wins + losses) * 100)
+                value = "{0} {1} {2} ({3}W/{4}L {5:.2f}%)".format(tier, division, lp, wins, losses, ratio)
+                em.add_field(name="Ranked TT", value=value, inline=False)
             overallRatio = (overallWins / (overallWins + overallLosses) * 100)
         value1 = "{0}W/{1}L ({2:.2f})%".format(overallWins, overallLosses, overallRatio)
 

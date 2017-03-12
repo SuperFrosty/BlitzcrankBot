@@ -65,7 +65,8 @@ async def on_command_error(error, ctx):
     elif isinstance(error, commands.CommandInvokeError):
         if str(error).startswith('Command raised an exception: APIError: Server returned error '
                                 '404 on call'):
-            errorMsg = "Could not find one of your arguments (most likely the summoner was not found, is under level 30, or has no ranked games this season)."
+            errorMsg = ('Server returned 404. This mostly likly means you have no ranked stats '
+                                'this season. Alternativly, you spelt your summoner name wrong.')
             await bot.send_message(ctx.message.channel, errorMsg)
             print(ctx.message.content)
             print(error)
