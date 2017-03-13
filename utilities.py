@@ -23,7 +23,8 @@ class Utilities:
         else:
             destination = '#{0.channel.name}: {0.server.name})'.format(message)
 
-        log.info('{0.timestamp}: {0.author} in {1}: {0.content}'.format(message, destination))
+        log.info('{0.timestamp}: {0.author} in {1}: {0.content}'.format(message,
+                    destination))
 
     @commands.command(pass_context=True, no_pm=True)
     async def ping(self, ctx):

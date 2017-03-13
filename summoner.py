@@ -61,7 +61,8 @@ class Summoner:
         summoner = riotapi.get_summoner_by_name(sumName)
         leagues = riotapi.get_league_entries_by_summoner(summoner)
         topChamp = riotapi.get_top_champion_masteries(summoner, max_entries=3)
-        topChamps = "{0}, {1} and {2}".format(topChamp[0].champion.name, topChamp[1].champion.name, topChamp[2].champion.name)
+        topChamps = "{0}, {1} and {2}".format(topChamp[0].champion.name,
+                    topChamp[1].champion.name, topChamp[2].champion.name)
         em.add_field(name="Top Champions", value=topChamps, inline=False)
         url = 'http://ddragon.leagueoflegends.com/cdn/7.3.3/img/champion/{}.png'.format(topChamp[0].champion.name)
         em.set_thumbnail(url=url)
@@ -77,20 +78,25 @@ class Summoner:
                 losses = entries.losses
                 overallLosses += losses
             #Fix the fact that if a preceding rank does not exist, the following is filed under it
+            ##Potentially fixed as of 13/03/17, will test
             if queue = 'RANKED_SOLO_5x5':
                 ratio = (wins / (wins + losses) * 100)
-                value = "{0} {1} {2} ({3}W/{4}L {5:.2f}%)".format(tier, division, lp, wins, losses, ratio)
+                value = "{0} {1} {2} ({3}W/{4}L {5:.2f}%)".format(tier,
+                            division, lp, wins, losses, ratio)
                 em.add_field(name="Ranked Solo", value=value, inline=False)
             elif queue = 'RANKED_FLEX_SR':
                 ratio = (wins / (wins + losses) * 100)
-                value = "{0} {1} {2} ({3}W/{4}L {5:.2f}%)".format(tier, division, lp, wins, losses, ratio)
+                value = "{0} {1} {2} ({3}W/{4}L {5:.2f}%)".format(tier,
+                            division, lp, wins, losses, ratio)
                 em.add_field(name="Ranked Flex", value=value, inline=False)
             elif queue = 'RANKED_FLEX_TT':
                 ratio = (wins / (wins + losses) * 100)
-                value = "{0} {1} {2} ({3}W/{4}L {5:.2f}%)".format(tier, division, lp, wins, losses, ratio)
+                value = "{0} {1} {2} ({3}W/{4}L {5:.2f}%)".format(tier,
+                            division, lp, wins, losses, ratio)
                 em.add_field(name="Ranked TT", value=value, inline=False)
             overallRatio = (overallWins / (overallWins + overallLosses) * 100)
-        value1 = "{0}W/{1}L ({2:.2f})%".format(overallWins, overallLosses, overallRatio)
+        value1 = "{0}W/{1}L ({2:.2f})%".format(overallWins, overallLosses,
+                    overallRatio)
 
         em.add_field(name="Overall", value=value1, inline=False)
         await self.bot.send_message(ctx.message.channel, "", embed=em)
