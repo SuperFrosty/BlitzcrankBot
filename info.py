@@ -4,7 +4,6 @@ Created on 20Feb.,2017
 @author = Alex Palmer
 '''
 from discord.ext import commands
-from cassiopeia import riotapi
 
 class Info:
     """Commands that return helpful information."""
@@ -12,7 +11,7 @@ class Info:
         self.bot = bot
 
     @commands.command(pass_context=True, no_pm=True)
-    async def regions(self, ctx):
+    async def regions(self):
         """Lists valid regions"""
         msg = "BR, EUNE, EUW, JP, KR, LAN, LAS, NA, OCE, PBE, RU, TR"
         await self.bot.say("```fix\n" + msg + "\n```")

@@ -3,7 +3,7 @@ Created on 29Jan.,2017
 
 @author = Alex Palmer
 '''
-import Permissions
+import permissions
 from discord.ext import commands
 class Reload:
     """Blitzcrank's reloading module,"""
@@ -12,7 +12,7 @@ class Reload:
 
     @commands.command(pass_context=True, no_pm=True)
     @permissions.is_owner()
-    async def reload(self, ctx, module : str):
+    async def reload(self, module: str):
         """Reloads the specified module."""
         try:
             self.bot.unload_extension(module)

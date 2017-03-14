@@ -3,7 +3,6 @@ Created on 19Feb.,2017
 
 @author = Alex Palmer
 '''
-import traceback
 import discord
 from discord.ext import commands
 from cassiopeia import riotapi
@@ -68,7 +67,7 @@ class Summoner:
         em.set_thumbnail(url=url)
         for league in leagues:
             loop += 1
-            queue = league.queue
+            queue = league.queue.value
             tier = league.tier.value
             for entries in league.entries:
                 division = entries.division.value
@@ -79,17 +78,17 @@ class Summoner:
                 overallLosses += losses
             #Fix the fact that if a preceding rank does not exist, the following is filed under it
             ##Potentially fixed as of 13/03/17, will test
-            if queue = 'RANKED_SOLO_5x5':
+            if queue == 'RANKED_SOLO_5x5':
                 ratio = (wins / (wins + losses) * 100)
                 value = "{0} {1} {2} ({3}W/{4}L {5:.2f}%)".format(tier,
                             division, lp, wins, losses, ratio)
                 em.add_field(name="Ranked Solo", value=value, inline=False)
-            elif queue = 'RANKED_FLEX_SR':
+            elif queue == 'RANKED_FLEX_SR':
                 ratio = (wins / (wins + losses) * 100)
                 value = "{0} {1} {2} ({3}W/{4}L {5:.2f}%)".format(tier,
                             division, lp, wins, losses, ratio)
                 em.add_field(name="Ranked Flex", value=value, inline=False)
-            elif queue = 'RANKED_FLEX_TT':
+            elif queue == 'RANKED_FLEX_TT':
                 ratio = (wins / (wins + losses) * 100)
                 value = "{0} {1} {2} ({3}W/{4}L {5:.2f}%)".format(tier,
                             division, lp, wins, losses, ratio)

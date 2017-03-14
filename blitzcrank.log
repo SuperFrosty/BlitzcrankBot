@@ -1,0 +1,12 @@
+2017-03-14 18:55:29,740:INFO:discord.client: on_ready has successfully been registered as an event
+2017-03-14 18:55:29,740:INFO:discord.client: on_message has successfully been registered as an event
+2017-03-14 18:55:29,740:INFO:discord.client: on_command_error has successfully been registered as an event
+2017-03-14 18:55:29,989:INFO:discord.client: logging in using static token
+2017-03-14 18:55:34,086:INFO:discord.gateway: Created websocket connected to wss://gateway.discord.gg?encoding=json&v=6
+2017-03-14 18:55:34,087:INFO:discord.gateway: sent the identify payload to create the websocket
+2017-03-14 18:55:41,916:INFO:discord.state: processed a chunk for 555 members.
+2017-03-14 18:55:42,191:INFO:discord.state: processed a chunk for 304 members.
+2017-03-14 18:55:42,750:INFO:discord.state: processed a chunk for 458 members.
+2017-03-14 18:55:43,154:INFO:discord.state: processed a chunk for 802 members.
+2017-03-14 18:55:43,595:INFO:discord.state: processed a chunk for 529 members.
+2017-03-14 18:55:44,961:INFO:discord.state: processed a chunk for 1000 members.

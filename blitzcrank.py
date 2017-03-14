@@ -3,16 +3,21 @@ Created on 19Feb.,2017
 
 @author: Alex Palmer
 '''
-import discord
 import asyncio
 import logging
-import backoff
 import traceback
-import permissions
+
+import aiohttp
+import discord
+import websockets
 from discord.ext import commands
+
+import backoff
+import permissions
+
 description = ("Made by SuperFrosty#5263 for various Riot API related "
-                "commands. Every command should be prefix'd with bl! "
-                "(for example, bl!lookup).")
+               "commands. Every command should be prefix'd with bl! "
+               "(for example, bl!lookup).")
 bot = commands.Bot(command_prefix=commands.when_mentioned_or('bl!'),
                     description=description)
 startup_extensions = ['utilities', 'summoner', 'info', 'reload']
@@ -48,7 +53,7 @@ async def on_message(message):
             originalmessage = await bot.send_message(message.channel,
                     'Executing: ' + message.content + ' one moment, please...')
             output = eval(parameters)
-        except:
+        except Exception:
             error = "```fix\n" + str(traceback.format_exc()) + "\n```"
             await bot.edit_message(originalmessage, error)
             traceback.print_exc()
@@ -63,27 +68,26 @@ async def on_message(message):
 async def on_command_error(error, ctx):
     if isinstance(error, commands.MissingRequiredArgument):
         await bot.send_message(ctx.message.channel, error)
-        pass
     elif isinstance(error, commands.CommandInvokeError):
         if str(error).startswith('Command raised an exception: APIError: Server'
-                                ' returned error '
-                                '404 on call'):
-            errorMsg = ('Server returned 404. This mostly likly means you have '
-                                'no ranked stats this season. Alternativly, '
-                                'you spelt your summoner name wrong.')
-            await bot.send_message(ctx.message.channel, errorMsg)
+                                 ' returned error '
+                                 '404 on call'):
+            error_msg = ('Server returned 404. This mostly likly means you have '
+                         'no ranked stats this season. Alternativly, '
+                         'you spelt your summoner name wrong.')
+            await bot.send_message(ctx.message.channel, error_msg)
             print(ctx.message.content)
             print(error)
         elif str(error).startswith("Command raised an exception: AttributeError"
-                                ": NoneType object has no attribute 'id'"):
+                                   ": NoneType object has no attribute 'id'"):
             errorMsg = ("Please use capitals for champion names (i.e. 'Teemo'"
                         "not 'teemo').")
             await bot.send_message(ctx.message.channel, errorMsg)
         if str(error).startswith('Command raised an exception: APIError: Server'
-                                ' returned error 400 on call'):
+                                 ' returned error 400 on call'):
             errorMsg = ("Server returned empty values, this usually mean no "
                         "mastery points found for given champion.")
-            await self.bot.send_message(ctx.message.channel, errorMsg)
+            await bot.send_message(ctx.message.channel, errorMsg)
             print(ctx.message.content)
             print(error)
         else:
@@ -91,12 +95,12 @@ async def on_command_error(error, ctx):
             print(ctx.message.content)
             print(error)
 
-async def keep_running(bot, token):
+async def keep_running():
     retry = backoff.ExponentialBackoff()
 
     while True:
         try:
-            await bot.login(token)
+            await bot.login(TOKEN)
 
         except (discord.HTTPException, aiohttp.ClientError):
             logging.exception("Attempting to login")
@@ -121,7 +125,7 @@ async def keep_running(bot, token):
                 raise # Do not reconnect on authentication failure
             logging.exception("Attempting to login")
             await asyncio.sleep(retry.delay())
-token = 'MjgyNzY1MjQzODYyNjE0MDE2.C4rRaw.FzkDxQ2Nq4Ul5gNibWRJ3EmH3Ag'
+TOKEN = 'MjgyNzY1MjQzODYyNjE0MDE2.C4rRaw.FzkDxQ2Nq4Ul5gNibWRJ3EmH3Ag'
 
 if __name__ == '__main__':
     for extension in startup_extensions:
@@ -131,4 +135,4 @@ if __name__ == '__main__':
             exc = '{}: {}'.format(type(e).__name__, e)
             print('Failed to load extension {}\n{}'.format(extension, exc))
 
-    asyncio.get_event_loop().run_until_complete(keep_running(bot, token))
+    asyncio.get_event_loop().run_until_complete(keep_running())
