@@ -98,7 +98,7 @@ async def on_command_error(error, ctx):
             print(ctx.message.content)
             print(error)
         else:
-            await bot.send_message(ctx.message.channel, error)
+            await bot.send_message(ctx.message.channel, "Something went wrong, sorry :I")
             print(ctx.message.content)
             print(error)
 
