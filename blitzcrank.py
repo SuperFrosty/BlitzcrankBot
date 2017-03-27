@@ -19,14 +19,14 @@ description = ("Made by SuperFrosty#5263 for various Riot API related "
                "commands. Every command should be prefix'd with bl! "
                "(for example, bl!lookup).")
 bot = commands.Bot(command_prefix=commands.when_mentioned_or('bl!'),
-                    description=description)
+                   description=description)
 startup_extensions = ['utilities', 'summoner', 'info', 'reload']
 ownerID = '66141201631285248'
 
 discord_logger = logging.getLogger('discord')
 discord_logger.setLevel(logging.INFO)
 file_handler = logging.FileHandler(filename='blitzcrank.log', encoding='utf-8',
-                                    mode='w')
+                                   mode='w')
 formatter = '%(asctime)s:%(levelname)s:%(name)s: %(message)s'
 log = logging.getLogger()
 log.setLevel(logging.INFO)
@@ -102,6 +102,25 @@ async def on_command_error(error, ctx):
             print(ctx.message.content)
             print(error)
 
+@bot.event
+async def on_server_join(server):
+    l = list(filter(lambda m: m.bot, server.members))
+    if len(l) / len(server.members) >= .60:
+        bots = "{0}% bots".format(100 * (len(l) / len(server.members)))
+        await bot.leave_server(server)
+        embed = discord.Embed(title="Left Server", colour=0x1affa7)
+        embed.add_field(name="Server:", value=server.name, inline=True)
+        embed.add_field(name="Reason:", value="Bot collection server", inline=True)
+        embed.add_field(name="Justification:", value=bots, inline=True)
+        await bot.send_message(discord.Object(id='295831639219634177'), "", embed=embed)
+    else:
+        members = len(server.members)
+        embed = discord.Embed(title="Joined Server", colour=0x1affa7)
+        embed.add_field(name="Server:", value=server.name, inline=True)
+        embed.add_field(name="Users:", value=members, inline=True)
+        embed.add_field(name="Total:", value=len(bot.servers), inline=True)
+        await bot.send_message(discord.Object(id='295831639219634177'), "", embed=embed)
+
 async def keep_running():
     retry = backoff.ExponentialBackoff()
 
@@ -132,7 +151,7 @@ async def keep_running():
                 raise # Do not reconnect on authentication failure
             logging.exception("Attempting to login")
             await asyncio.sleep(retry.delay())
-TOKEN = 'MjgyNzY1MjQzODYyNjE0MDE2.C4rRaw.FzkDxQ2Nq4Ul5gNibWRJ3EmH3Ag'
+TOKEN = 'MjgyNzY1MjQzODYyNjE0MDE2.C7phSg.mCQp7oLEqdZeWTmxpt5QQqVNrqQ'
 
 if __name__ == '__main__':
     for extension in startup_extensions:
