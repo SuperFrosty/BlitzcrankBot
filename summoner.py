@@ -19,19 +19,18 @@ class Summoner:
         """'Summoner Name' 'Champion' 'Region'"""
         await self.bot.send_typing(ctx.message.channel)
         chest = None
-
         riotapi.set_region(region)
         champion = riotapi.get_champion_by_name(champName)
         summoner = riotapi.get_summoner_by_name(sumName)
         mastery = riotapi.get_champion_mastery(summoner, champion)
-        url = 'http://ddragon.leagueoflegends.com/cdn/7.3.3/img/champion/{}.png'.format(mastery.champion.name)
+        #url = 'http://ddragon.leagueoflegends.com/cdn/7.3.3/img/champion/{}.png'.format(mastery.champion.name)
         if mastery.chest_granted == True:
             chest = "Yes"
         elif mastery.chest_granted == False:
             chest = "No"
 
         em = discord.Embed(title="Champion Mastery", colour=0x1affa7)
-        em.set_thumbnail(url=url)
+       # em.set_thumbnail(url=url)
         em.add_field(name='Summoner:', value='{}'.format(sumName), inline=True)
         em.add_field(name='Champion:', value="{}".format(champName),
                         inline=True)

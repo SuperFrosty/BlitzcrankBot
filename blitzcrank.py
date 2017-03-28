@@ -104,6 +104,7 @@ async def on_command_error(error, ctx):
             await bot.send_message(ctx.message.channel, "Something went wrong, sorry :I")
             print(ctx.message.content)
             print(error)
+            traceback.print_exc()
         await bot.send_message(ctx.message.channel, "If you feel like this shouldn't be happening, feel free to join my support server with bl!support")
 @bot.event
 async def on_server_join(server):
