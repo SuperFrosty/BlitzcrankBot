@@ -38,6 +38,7 @@ discord_logger.addHandler(file_handler)
 
 @bot.event
 async def on_ready():
+    """Sets game presence and indicates when ready."""
     game = 'bl!help | Fleshling Compatibility Service'
     await bot.change_presence(game=discord.Game(name=game))
     print('Logged in as:\n{0} (ID: {0.id})'.format(bot.user))
@@ -45,6 +46,7 @@ async def on_ready():
 
 @bot.event
 async def on_message(message):
+    """Functions that are not part of ext for various reasons."""
     #eval command here because idk how to get it to work in cogs
     if message.content.startswith('bl!eval') and permissions.is_owner():
         parameters = ' '.join(message.content.strip().split(' ')[1:])
@@ -66,6 +68,7 @@ async def on_message(message):
 
 @bot.event
 async def on_command_error(error, ctx):
+    """Error handling."""
     if isinstance(error, commands.MissingRequiredArgument):
         await bot.send_message(ctx.message.channel, error)
     elif isinstance(error, commands.CommandInvokeError):
@@ -103,6 +106,7 @@ async def on_command_error(error, ctx):
             print(error)
 
 async def keep_running():
+    """Retries connect on loss for any reason other than 4004."""
     retry = backoff.ExponentialBackoff()
 
     while True:
