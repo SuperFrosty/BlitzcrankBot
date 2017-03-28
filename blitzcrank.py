@@ -105,6 +105,7 @@ async def on_command_error(error, ctx):
 @bot.event
 async def on_server_join(server):
     l = list(filter(lambda m: m.bot, server.members))
+    members = len(server.members)
     if len(l) / len(server.members) >= .60:
         bots = "{0}% bots".format(100 * (len(l) / len(server.members)))
         await bot.leave_server(server)
@@ -114,7 +115,6 @@ async def on_server_join(server):
         embed.add_field(name="Justification:", value=bots, inline=True)
         await bot.send_message(discord.Object(id='295831639219634177'), "", embed=embed)
     else:
-        members = len(server.members)
         embed = discord.Embed(title="Joined Server", colour=0x1affa7)
         embed.add_field(name="Server:", value=server.name, inline=True)
         embed.add_field(name="Users:", value=members, inline=True)
