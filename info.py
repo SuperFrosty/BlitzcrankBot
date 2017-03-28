@@ -27,7 +27,7 @@ class Info:
         """Join the support server to ask for help!"""
         link = "https://discord.gg/J78uAgZ"
         await self.bot.say("Join my support server if you need help with commands!\n " + link)
-
+        '
 def setup(bot):
     """Adds cog to bot"""
     bot.add_cog(Info(bot))
