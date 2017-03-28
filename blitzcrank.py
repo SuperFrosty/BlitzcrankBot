@@ -114,6 +114,7 @@ async def on_server_join(server):
         embed = discord.Embed(title="Left Server", colour=0x1affa7)
         embed.add_field(name="Server:", value=server.name, inline=True)
         embed.add_field(name="Reason:", value="Bot collection server", inline=True)
+        embed.add_field(name="Users:", value=members, inline=True)
         embed.add_field(name="Justification:", value=bots, inline=True)
         await bot.send_message(discord.Object(id='295831639219634177'), "", embed=embed)
     else:
