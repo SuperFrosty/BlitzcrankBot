@@ -38,6 +38,7 @@ discord_logger.addHandler(file_handler)
 
 @bot.event
 async def on_ready():
+    """Sets game presence and indicates when ready."""
     game = 'bl!help | Fleshling Compatibility Service'
     await bot.change_presence(game=discord.Game(name=game))
     print('Logged in as:\n{0} (ID: {0.id})'.format(bot.user))
@@ -45,6 +46,7 @@ async def on_ready():
 
 @bot.event
 async def on_message(message):
+    """Functions that are not part of ext for various reasons."""
     #eval command here because idk how to get it to work in cogs
     if message.content.startswith('bl!eval') and permissions.is_owner():
         parameters = ' '.join(message.content.strip().split(' ')[1:])
@@ -66,6 +68,7 @@ async def on_message(message):
 
 @bot.event
 async def on_command_error(error, ctx):
+    """Error handling."""
     if isinstance(error, commands.MissingRequiredArgument):
         await bot.send_message(ctx.message.channel, error)
     elif isinstance(error, commands.CommandInvokeError):
@@ -112,6 +115,7 @@ async def on_server_join(server):
         embed = discord.Embed(title="Left Server", colour=0x1affa7)
         embed.add_field(name="Server:", value=server.name, inline=True)
         embed.add_field(name="Reason:", value="Bot collection server", inline=True)
+        embed.add_field(name="Users:", value=members, inline=True)
         embed.add_field(name="Justification:", value=bots, inline=True)
         await bot.send_message(discord.Object(id='295831639219634177'), "", embed=embed)
     else:
@@ -122,6 +126,7 @@ async def on_server_join(server):
         await bot.send_message(discord.Object(id='295831639219634177'), "", embed=embed)
 
 async def keep_running():
+    """Retries connect on loss for any reason other than 4004."""
     retry = backoff.ExponentialBackoff()
 
     while True:
