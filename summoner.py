@@ -16,7 +16,7 @@ class Summoner:
 
     @commands.command(pass_context=True, no_pm=True)
     async def champmastery(self, ctx, sumName:str, champName:str, region:str):
-       """'Summoner Name' 'Champion' 'Region'"""
+        """'Summoner Name' 'Champion' 'Region'"""
         await self.bot.send_typing(ctx.message.channel)
         chest = None
 
