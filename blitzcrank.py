@@ -71,6 +71,8 @@ async def on_command_error(error, ctx):
     """Error handling."""
     if isinstance(error, commands.MissingRequiredArgument):
         await bot.send_message(ctx.message.channel, error)
+    if isinstance(error, commands.TooManyArguments):
+        await bot.send_message(ctx.message.channel, "Too many arguments, please type champion names in double quotes.")    
     elif isinstance(error, commands.CommandInvokeError):
         if str(error).startswith('Command raised an exception: APIError: Server'
                                  ' returned error '
@@ -106,6 +108,7 @@ async def on_command_error(error, ctx):
             print(error)
             traceback.print_exc()
         await bot.send_message(ctx.message.channel, "If you feel like this shouldn't be happening, feel free to join my support server with bl!support")
+    
 @bot.event
 async def on_server_join(server):
     l = list(filter(lambda m: m.bot, server.members))

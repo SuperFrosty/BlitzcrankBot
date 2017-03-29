@@ -14,7 +14,7 @@ class Summoner:
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(pass_context=True, no_pm=True)
+    @commands.command(pass_context=True, no_pm=True, ignore_extra=False)
     async def champmastery(self, ctx, sumName:str, champName:str, region:str):
         """'Summoner Name' 'Champion' 'Region'"""
         if "'" in sumName:
@@ -56,7 +56,7 @@ class Summoner:
 
         await self.bot.send_message(ctx.message.channel, '', embed=em)
 
-    @commands.command(pass_context=True, no_pm=True)
+    @commands.command(pass_context=True, no_pm=True, ignore_extra=False)
     async def lookup(self, ctx, sumName:str, region:str):
         """'Summoner Name' 'Region'"""
         if "'" in sumName:
