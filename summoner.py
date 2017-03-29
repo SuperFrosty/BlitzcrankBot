@@ -79,8 +79,7 @@ class Summoner:
             urlChampName = mastery.champion.name.replace(" ", "")
             url = 'http://ddragon.leagueoflegends.com/cdn/7.3.3/img/champion/{}.png'.format(urlChampName)
         else:
-            url = 'http://ddragon.leagueoflegends.com/cdn/7.3.3/img/champion/{}.png'.format(mastery.champion.name)
-        #url = 'http://ddragon.leagueoflegends.com/cdn/7.3.3/img/champion/{}.png'.format(topChamp[0].champion.name)
+            url = 'http://ddragon.leagueoflegends.com/cdn/7.3.3/img/champion/{}.png'.format(topChamp[0].champion.name)
         em.set_thumbnail(url=url)
         for league in leagues:
             loop += 1
@@ -93,8 +92,6 @@ class Summoner:
                 overallWins += wins
                 losses = entries.losses
                 overallLosses += losses
-            #Fix the fact that if a preceding rank does not exist, the following is filed under it
-            ##Potentially fixed as of 13/03/17, will test
             if queue == 'RANKED_SOLO_5x5':
                 ratio = (wins / (wins + losses) * 100)
                 value = "{0} {1} {2} ({3}W/{4}L {5:.2f}%)".format(tier,
