@@ -17,20 +17,30 @@ class Summoner:
     @commands.command(pass_context=True, no_pm=True)
     async def champmastery(self, ctx, sumName:str, champName:str, region:str):
         """'Summoner Name' 'Champion' 'Region'"""
+        if "'" in sumName:
+            await self.bot.send_message(ctx.message.channel, "Please use double quotes to enclose names.")
+            return
+        if "'" in champName:
+            await self.bot.send_message(ctx.message.channel, "Please use double quotes to enclose names.")
+            return 
         await self.bot.send_typing(ctx.message.channel)
         chest = None
         riotapi.set_region(region)
         champion = riotapi.get_champion_by_name(champName)
         summoner = riotapi.get_summoner_by_name(sumName)
         mastery = riotapi.get_champion_mastery(summoner, champion)
-        #url = 'http://ddragon.leagueoflegends.com/cdn/7.3.3/img/champion/{}.png'.format(mastery.champion.name)
+        if " " in mastery.champion.name:
+            urlChampName = mastery.champion.name.replace(" ", "")
+            url = 'http://ddragon.leagueoflegends.com/cdn/7.3.3/img/champion/{}.png'.format(urlChampName)
+        else:
+            url = 'http://ddragon.leagueoflegends.com/cdn/7.3.3/img/champion/{}.png'.format(mastery.champion.name)
         if mastery.chest_granted == True:
             chest = "Yes"
         elif mastery.chest_granted == False:
             chest = "No"
 
         em = discord.Embed(title="Champion Mastery", colour=0x1affa7)
-       # em.set_thumbnail(url=url)
+        em.set_thumbnail(url=url)
         em.add_field(name='Summoner:', value='{}'.format(sumName), inline=True)
         em.add_field(name='Champion:', value="{}".format(champName),
                         inline=True)
@@ -49,6 +59,9 @@ class Summoner:
     @commands.command(pass_context=True, no_pm=True)
     async def lookup(self, ctx, sumName:str, region:str):
         """'Summoner Name' 'Region'"""
+        if "'" in sumName:
+            await self.bot.send_message(ctx.message.channel, "Please use double quotes to enclose names.")
+            return
         await self.bot.send_typing(ctx.message.channel)
         title = "Summoner Lookup - {0} ({1})".format(sumName, region)
         em = discord.Embed(title=title, colour=0x1affa7)

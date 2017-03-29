@@ -82,18 +82,18 @@ async def on_command_error(error, ctx):
             print(ctx.message.content)
             print(error)
         elif str(error).startswith("Command raised an exception: AttributeError"
-                                   ": NoneType object has no attribute 'id'"):
+                                   ": 'NoneType' object has no attribute 'id'"):
             error_msg = ("Please use capitals for champion names (i.e. 'Teemo'"
                          "not 'teemo').")
             await bot.send_message(ctx.message.channel, error_msg)
-        if str(error).startswith('Command raised an exception: APIError: Server'
+        elif str(error).startswith('Command raised an exception: APIError: Server'
                                  ' returned error 400 on call'):
             error_msg = ("Server returned empty values, this usually mean no "
                          "mastery points found for given champion.")
             await bot.send_message(ctx.message.channel, error_msg)
             print(ctx.message.content)
             print(error)
-        if str(error).startswith('Command raised an exception: APIError: Server'
+        elif str(error).startswith('Command raised an exception: APIError: Server'
                                  ' returned error 403 on call'):
             error_msg = ("Riot's servers denied your attempt escaping a URL :( (Don't use "
                          "'/'s in your name)")
