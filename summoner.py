@@ -76,7 +76,7 @@ class Summoner:
                     topChamp[1].champion.name, topChamp[2].champion.name)
         em.add_field(name="Top Champions", value=topChamps, inline=False)
         if " " in topChamp[0].champion.name:
-            urlChampName = mastery.champion.name.replace(" ", "")
+            urlChampName = topChamp[0].champion.name.replace(" ", "")
             url = 'http://ddragon.leagueoflegends.com/cdn/7.3.3/img/champion/{}.png'.format(urlChampName)
         else:
             url = 'http://ddragon.leagueoflegends.com/cdn/7.3.3/img/champion/{}.png'.format(topChamp[0].champion.name)
