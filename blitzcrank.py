@@ -48,7 +48,7 @@ async def on_ready():
 async def on_message(message):
     """Functions that are not part of ext for various reasons."""
     #eval command here because idk how to get it to work in cogs
-    if message.content.startswith('bl!eval') and permissions.is_owner():
+    if message.content.startswith('bl!eval') and message.author.id == '66141201631285248':
         parameters = ' '.join(message.content.strip().split(' ')[1:])
         output = None
         try:
