@@ -20,7 +20,7 @@ class Summoner:
         if "'" in sumName:
             await self.bot.send_message(ctx.message.channel, "Please use double quotes to enclose names.")
             return
-        if "'" in champName:
+        if "'" + champName + "'" in champName:
             await self.bot.send_message(ctx.message.channel, "Please use double quotes to enclose names.")
             return 
         await self.bot.send_typing(ctx.message.channel)
@@ -32,6 +32,10 @@ class Summoner:
         if " " in mastery.champion.name:
             urlChampName = mastery.champion.name.replace(" ", "")
             url = 'http://ddragon.leagueoflegends.com/cdn/7.3.3/img/champion/{}.png'.format(urlChampName)
+        elif "Vel'Koz" in mastery.champion.name:
+            url = 'http://ddragon.leagueoflegends.com/cdn/7.3.3/img/champion/Velkoz.png'
+        elif "Kha'Zix" in mastery.champion.name:
+            url = 'http://ddragon.leagueoflegends.com/cdn/7.3.3/img/champion/Khazix.png'
         else:
             url = 'http://ddragon.leagueoflegends.com/cdn/7.3.3/img/champion/{}.png'.format(mastery.champion.name)
         if mastery.chest_granted == True:

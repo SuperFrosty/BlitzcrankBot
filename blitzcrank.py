@@ -160,7 +160,7 @@ async def keep_running():
                 raise # Do not reconnect on authentication failure
             logging.exception("Attempting to login")
             await asyncio.sleep(retry.delay())
-TOKEN = 'MjgyNzY1MjQzODYyNjE0MDE2.C7phSg.mCQp7oLEqdZeWTmxpt5QQqVNrqQ'
+TOKEN = 'MjYzNTUwNzQ0OTIwMDY0MDMx.C0VIfQ.O6883-ptXbLBRh7QkzLC89Mu_ZA'
 
 if __name__ == '__main__':
     for extension in startup_extensions:
