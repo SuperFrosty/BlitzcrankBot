@@ -72,13 +72,13 @@ async def on_command_error(error, ctx):
     if isinstance(error, commands.MissingRequiredArgument):
         await bot.send_message(ctx.message.channel, error)
     if isinstance(error, commands.TooManyArguments):
-        await bot.send_message(ctx.message.channel, "Too many arguments, please type champion names in double quotes.")    
+        await bot.send_message(ctx.message.channel, "Too many arguments, please type champion and summoner names in double quotes.")    
     elif isinstance(error, commands.CommandInvokeError):
         if str(error).startswith('Command raised an exception: APIError: Server'
                                  ' returned error '
                                  '404 on call'):
-            error_msg = ('Server returned 404. This mostly likly means you have '
-                         'no ranked stats this season. Alternativly, '
+            error_msg = ('Server returned 404. This mostly likely means you have '
+                         'no ranked stats this season. Alternatively, '
                          'you spelt your summoner name wrong.')
             await bot.send_message(ctx.message.channel, error_msg)
             print(ctx.message.content)
