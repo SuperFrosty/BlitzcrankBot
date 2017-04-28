@@ -88,6 +88,16 @@ class Summoner:
         if " " in topChamp[0].champion.name:
             urlChampName = topChamp[0].champion.name.replace(" ", "")
             url = 'http://ddragon.leagueoflegends.com/cdn/7.3.3/img/champion/{}.png'.format(urlChampName)
+        elif "Vel'Koz" in topChamp[0].champion.name:
+            url = 'http://ddragon.leagueoflegends.com/cdn/7.3.3/img/champion/Velkoz.png'
+        elif "Kha'Zix" in topChamp[0].champion.name:
+            url = 'http://ddragon.leagueoflegends.com/cdn/7.3.3/img/champion/Khazix.png'
+        elif "Rek'Sai" in topChamp[0].champion.name:
+            url = 'http://ddragon.leagueoflegends.com/cdn/7.3.3/img/champion/RekSai.png'
+        elif "Cho'Gath" in topChamp[0].champion.name:
+            url = 'http://ddragon.leagueoflegends.com/cdn/7.8.1/img/champion/Chogath.png'
+        elif "Kog'Maw" in topChamp[0].champion.name:
+            url = 'http://ddragon.leagueoflegends.com/cdn/7.8.1/img/champion/KogMaw.png'
         else:
             url = 'http://ddragon.leagueoflegends.com/cdn/7.3.3/img/champion/{}.png'.format(topChamp[0].champion.name)
         em.set_thumbnail(url=url)
