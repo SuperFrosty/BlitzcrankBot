@@ -36,6 +36,12 @@ class Summoner:
             url = 'http://ddragon.leagueoflegends.com/cdn/7.3.3/img/champion/Velkoz.png'
         elif "Kha'Zix" in mastery.champion.name:
             url = 'http://ddragon.leagueoflegends.com/cdn/7.3.3/img/champion/Khazix.png'
+        elif "Rek'Sai" in mastery.champion.name:
+            url = 'http://ddragon.leagueoflegends.com/cdn/7.3.3/img/champion/RekSai.png'
+        elif "Cho'Gath" in mastery.champion.name:
+            url = 'http://ddragon.leagueoflegends.com/cdn/7.8.1/img/champion/Chogath.png'
+        elif "Kog'Maw" in mastery.champion.name:
+            url = 'http://ddragon.leagueoflegends.com/cdn/7.8.1/img/champion/KogMaw.png'
         else:
             url = 'http://ddragon.leagueoflegends.com/cdn/7.3.3/img/champion/{}.png'.format(mastery.champion.name)
         if mastery.chest_granted == True:
