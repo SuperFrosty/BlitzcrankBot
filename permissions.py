@@ -7,6 +7,12 @@ def is_owner_check(message):
 def is_owner():
     return commands.check(lambda ctx: is_owner_check(ctx.message))
 
+def is_jord_check(message):
+    return message.author.id == "170655702170337280"
+
+def is_jord(message):
+    return commands.check(lambda ctx: is_jord_check(ctx.message))
+
 # The permission system of the bot is based on a "just works" basis
 # You have permissions and the bot has permissions. If you meet the permissions
 # required to execute the command (and the bot does as well) then it goes through
