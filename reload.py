@@ -10,7 +10,7 @@ class Reload:
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(pass_context=True, no_pm=True)
+    @commands.command(no_pm=True)
     @permissions.is_owner()
     async def reload(self, *, module: str):
         """Reloads the specified module."""
