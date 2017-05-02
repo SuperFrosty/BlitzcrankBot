@@ -10,7 +10,7 @@ def is_owner():
 def is_jord_check(message):
     return message.author.id == "170655702170337280"
 
-def is_jord(message):
+def is_jord():
     return commands.check(lambda ctx: is_jord_check(ctx.message))
 
 # The permission system of the bot is based on a "just works" basis
