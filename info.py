@@ -4,6 +4,7 @@ Created on 20Feb.,2017
 @author = Alex Palmer
 '''
 import permissions
+import asyncio
 from discord.ext import commands
 
 class Info:
@@ -32,7 +33,9 @@ class Info:
     @commands.command(no_pm=True)
     @permissions.is_jord()
     async def love(self):
-        await self.bot.say("<3")
+        await self.bot.say("Running my Fleshing Compatibility Service...")
+        await asyncio.sleep(3)
+        await self.bot.say("I match with you!")
         
 def setup(bot):
     """Adds cog to bot"""
