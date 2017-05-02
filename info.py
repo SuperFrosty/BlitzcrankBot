@@ -3,6 +3,7 @@ Created on 20Feb.,2017
 
 @author = Alex Palmer
 '''
+import permissions
 from discord.ext import commands
 
 class Info:
