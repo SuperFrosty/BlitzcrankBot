@@ -9,7 +9,7 @@ from cassiopeia import riotapi
 
 class Summoner:
     """Commands relating to individual summoners."""
-    riotapi.set_api_key('RGAPI-8d8a8efd-d6da-4025-895f-905ccdb38a21')
+    riotapi.set_api_key('RGAPI-4f3fecda-7709-4514-86b3-3a30c7fd905f')
 
     def __init__(self, bot):
         self.bot = bot
