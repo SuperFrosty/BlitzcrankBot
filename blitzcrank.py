@@ -97,8 +97,7 @@ async def on_command_error(error, ctx):
             print(error)
         elif str(error).startswith('Command raised an exception: APIError: Server'
                                  ' returned error 403 on call'):
-            error_msg = ("Riot's servers denied your attempt escaping a URL :( (Don't use "
-                         "'/'s in your name)")
+            error_msg = ("Riot returned a 403 FORBIDDEN which could be for various reasons")
             await bot.send_message(ctx.message.channel, error_msg)
             print(ctx.message.content)
             print(error)
@@ -160,7 +159,7 @@ async def keep_running():
                 raise # Do not reconnect on authentication failure
             logging.exception("Attempting to login")
             await asyncio.sleep(retry.delay())
-TOKEN = 'MjgyNzY1MjQzODYyNjE0MDE2.C96xyQ.BbShnF7CCFedalWYeK1r8Bu53BA'
+TOKEN = ''
 
 if __name__ == '__main__':
     for extension in startup_extensions:
